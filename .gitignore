@@ -1,0 +1,17 @@
+# Build artifacts
+[Bb]in/
+[Oo]bj/
+TestResults/
+
+# Local IDE state
+.vs/
+.idea/
+*.user
+*.suo
+
+# Local development worktrees
+.worktrees/
+
+# Generated logs and local settings
+*.log
+appsettings.local.json
