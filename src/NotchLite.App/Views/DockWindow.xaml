@@ -1,0 +1,107 @@
+<Window x:Class="NotchLite.App.Views.DockWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:NotchLite.App.ViewModels"
+        Title="Zenith Dock"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        ShowInTaskbar="False"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        Loaded="OnWindowLoaded"
+        MouseEnter="OnWindowMouseEnter"
+        MouseLeave="OnWindowMouseLeave"
+        MouseMove="OnWindowMouseMove">
+
+    <Grid Margin="12" x:Name="RootGrid">
+        <Grid.RenderTransform>
+            <TranslateTransform x:Name="DockTranslate" Y="0"/>
+        </Grid.RenderTransform>
+
+        <!-- Dock Drop Shadow -->
+        <Border CornerRadius="24" Background="#000000" Opacity="0.45">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="18" ShadowDepth="3" Direction="270" Opacity="0.5"/>
+            </Border.Effect>
+        </Border>
+
+        <!-- Glass Dock Capsule matching media_1795089545392_bece357d.png -->
+        <Border Background="#F20D0E12"
+                BorderBrush="#25FFFFFF"
+                BorderThickness="1"
+                CornerRadius="24"
+                Padding="8,5">
+
+            <ItemsControl ItemsSource="{Binding DockApps}" x:Name="DockItemsControl">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <!-- Interactive Dock App Icon -->
+                        <Grid Margin="4,0" Cursor="Hand" MouseLeftButtonDown="OnDockItemClick" Tag="{Binding}">
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform x:Name="IconScale" ScaleX="1.0" ScaleY="1.0" CenterX="19" CenterY="19"/>
+                                    <TranslateTransform x:Name="IconTranslate" Y="0"/>
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+
+                            <StackPanel HorizontalAlignment="Center">
+                                <!-- App Icon Squircle Tile -->
+                                <Border Width="38" Height="38" CornerRadius="10" Background="{Binding BackgroundColorHex}" HorizontalAlignment="Center">
+                                    <Border.Effect>
+                                        <DropShadowEffect BlurRadius="6" ShadowDepth="1.5" Direction="270" Opacity="0.3"/>
+                                    </Border.Effect>
+                                    <Path Fill="#FFFFFF" Stretch="Uniform" Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Path.Style>
+                                            <Style TargetType="Path">
+                                                <Setter Property="Data" Value="{StaticResource GeomGrid}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IconKey}" Value="GeomFolder">
+                                                        <Setter Property="Data" Value="{StaticResource GeomFolder}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IconKey}" Value="GeomGlobe">
+                                                        <Setter Property="Data" Value="{StaticResource GeomGlobe}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IconKey}" Value="GeomMusic">
+                                                        <Setter Property="Data" Value="{StaticResource GeomMusic}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IconKey}" Value="GeomSliders">
+                                                        <Setter Property="Data" Value="{StaticResource GeomSliders}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IconKey}" Value="GeomGear">
+                                                        <Setter Property="Data" Value="{StaticResource GeomGear}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Path.Style>
+                                    </Path>
+                                </Border>
+
+                                <!-- Running Indicator Dot (Centered below each icon) -->
+                                <Ellipse Width="4" Height="4" Fill="#FFFFFF" Margin="0,3,0,0" HorizontalAlignment="Center">
+                                    <Ellipse.Style>
+                                        <Style TargetType="Ellipse">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsRunning}" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Ellipse.Style>
+                                </Ellipse>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+    </Grid>
+</Window>

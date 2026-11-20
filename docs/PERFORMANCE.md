@@ -1,6 +1,6 @@
 # Performance Strategy
 
-- The idle shell must not use a render loop or high-frequency timer.
+- The idle shell must not use a render loop, high-frequency timer, or continuous idle polling.
 - Settings and optional services load asynchronously and lazily.
 - UI updates occur on user interaction or Windows events; system metrics sample only while their card is visible.
 - Low Resource and Gaming modes suspend decorative effects and nonessential modules.

@@ -14,7 +14,7 @@ NotchLite is a local-first, lightweight Windows desktop utility with a top-centr
 
 ## Constraints
 
-- Target `net8.0-windows` until .NET 10 support is verified on the required Windows versions.
+- Target `net10.0-windows`; .NET 10 is the supported LTS line. Official support is limited to supported Windows 11 releases and specified Windows 10 LTSC/Enterprise releases, so Windows 10 consumer editions require explicit compatibility testing and must not be represented as Microsoft-supported by default.
 - No Electron, Chromium, Python, telemetry, cloud account, or background polling.
 - Keep dependencies to CommunityToolkit.Mvvm and Microsoft.Extensions packages.
 - Optional modules must not prevent the shell from starting or shutting down.

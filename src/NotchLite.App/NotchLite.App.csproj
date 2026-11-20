@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.15" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.15" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NotchLite.Application\NotchLite.Application.csproj" />
+    <ProjectReference Include="..\NotchLite.Infrastructure\NotchLite.Infrastructure.csproj" />
+    <ProjectReference Include="..\NotchLite.Platform\NotchLite.Platform.csproj" />
+  </ItemGroup>
+</Project>

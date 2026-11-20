@@ -9,3 +9,13 @@
 | `NotchLite.Platform` | Future Win32, DWM, display, and shell abstractions |
 
 Dependencies flow inward: App -> Application/Infrastructure/Platform -> Core. Core references no other NotchLite project.
+
+## Component interaction
+
+```text
+App startup -> Single-instance service -> Settings service -> Lifecycle coordinator
+    |                                                       |
+    +-> structured logger <---------------------------------+
+                                                            |
+                                                managed modules (later phases)
+```
